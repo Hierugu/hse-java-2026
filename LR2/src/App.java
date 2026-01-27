@@ -249,6 +249,18 @@ public class App {
             // Демонстрация работы с коллекциями
             System.out.println("\n--- Работа с коллекциями объектов ---");
             java.util.ArrayList<Aeroplane> fleet = new java.util.ArrayList<>();
+            
+            // Создаем дополнительные объекты для коллекции
+            Engine airbusEngine = new Engine("Rolls-Royce Trent 900", 36300, 11.8);
+            PassengerPlane airbus380 = new PassengerPlane("Airbus", "A380", 2021, 945.0,
+                                                           853, 79.8, airbusEngine,
+                                                           100, 753, true);
+            
+            Engine cargoEngine = new Engine("GE CF6-80C2", 28000, 10.5);
+            CargoPlane boeing747F = new CargoPlane("Boeing", "747-8F", 2019, 908.0,
+                                                    68.4, cargoEngine,
+                                                    140000.0, 858.0, true);
+            
             fleet.add(airbus380);
             fleet.add(boeing747F);
             fleet.add(testPassengerPlane);

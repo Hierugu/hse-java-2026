@@ -192,5 +192,92 @@ public class App {
         System.out.println("✓ Интерфейсы - реализовано (Flyable, Maintainable)");
         System.out.println("✓ Инкапсуляция - реализовано (private поля, public методы)");
         System.out.println("=".repeat(70));
+        
+        // ========== 11. РАБОТА С ФАЙЛАМИ ==========
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println("11. ДЕМОНСТРАЦИЯ РАБОТЫ С ФАЙЛАМИ");
+        System.out.println("=".repeat(70));
+        
+        demonstrateFileOperations();
+    }
+    
+    // Демонстрация работы с файлами
+    private static void demonstrateFileOperations() {
+        try {
+            // Создаем тестовые объекты
+            System.out.println("\n--- Создание тестовых объектов ---");
+            Engine testEngine = new Engine("Test Engine", 30000, 15.5);
+            PassengerPlane testPassengerPlane = new PassengerPlane("TestAir", "Test-100", 2023, 950.0,
+                                                                  200, 40.0, testEngine,
+                                                                  30, 170, true);
+            CargoPlane testCargoPlane = new CargoPlane("CargoAir", "Cargo-200", 2022, 900.0,
+                                                      45.0, testEngine,
+                                                      100000.0, 750.0, true);
+            
+            // Демонстрация сохранения отдельных объектов
+            System.out.println("\n--- Сохранение отдельных объектов в файлы ---");
+            String engineFile = "data/engine.json";
+            String passengerPlaneFile = "data/passenger_plane.json";
+            String cargoPlaneFile = "data/cargo_plane.json";
+            
+            FileManager.saveToFile(testEngine, engineFile);
+            System.out.println("✓ Двигатель сохранен в файл: " + engineFile);
+            
+            FileManager.saveToFile(testPassengerPlane, passengerPlaneFile);
+            System.out.println("✓ Пассажирский самолет сохранен в файл: " + passengerPlaneFile);
+            
+            FileManager.saveToFile(testCargoPlane, cargoPlaneFile);
+            System.out.println("✓ Грузовой самолет сохранен в файл: " + cargoPlaneFile);
+            
+            // Демонстрация загрузки отдельных объектов
+            System.out.println("\n--- Загрузка отдельных объектов из файлов ---");
+            Engine loadedEngine = FileManager.loadFromFile(engineFile, Engine.class);
+            System.out.println("✓ Двигатель загружен из файла");
+            System.out.println("  Оригинал: " + testEngine.getInfo());
+            System.out.println("  Загружен:  " + loadedEngine.getInfo());
+            
+            PassengerPlane loadedPassengerPlane = FileManager.loadFromFile(passengerPlaneFile, PassengerPlane.class);
+            System.out.println("✓ Пассажирский самолет загружен из файла");
+            System.out.println("  Оригинал: " + testPassengerPlane.getManufacturer() + " " + testPassengerPlane.getModel());
+            System.out.println("  Загружен:  " + loadedPassengerPlane.getManufacturer() + " " + loadedPassengerPlane.getModel());
+            
+            CargoPlane loadedCargoPlane = FileManager.loadFromFile(cargoPlaneFile, CargoPlane.class);
+            System.out.println("✓ Грузовой самолет загружен из файла");
+            System.out.println("  Оригинал: " + testCargoPlane.getManufacturer() + " " + testCargoPlane.getModel());
+            System.out.println("  Загружен:  " + loadedCargoPlane.getManufacturer() + " " + loadedCargoPlane.getModel());
+            
+            // Демонстрация работы с коллекциями
+            System.out.println("\n--- Работа с коллекциями объектов ---");
+            java.util.ArrayList<Aeroplane> fleet = new java.util.ArrayList<>();
+            fleet.add(airbus380);
+            fleet.add(boeing747F);
+            fleet.add(testPassengerPlane);
+            fleet.add(testCargoPlane);
+            
+            String fleetFile = "data/fleet.json";
+            FileManager.saveCollectionToFile(fleet, fleetFile);
+            System.out.println("✓ Коллекция самолетов сохранена в файл: " + fleetFile);
+            
+            java.util.List<Aeroplane> loadedFleet = FileManager.loadCollectionFromFile(fleetFile, Aeroplane.class);
+            System.out.println("✓ Коллекция самолетов загружена из файла");
+            System.out.println("  Размер оригинальной коллекции: " + fleet.size());
+            System.out.println("  Размер загруженной коллекции: " + loadedFleet.size());
+            
+            // Демонстрация обработки исключений
+            System.out.println("\n--- Демонстрация обработки исключений ---");
+            try {
+                FileManager.loadFromFile("nonexistent_file.json", Engine.class);
+            } catch (FileOperationException e) {
+                System.out.println("✓ Перехвачено исключение: " + e.getMessage());
+            }
+            
+            System.out.println("\n" + "=".repeat(70));
+            System.out.println("РАБОТА С ФАЙЛАМИ УСПЕШНО ЗАВЕРШЕНА");
+            System.out.println("=".repeat(70));
+            
+        } catch (FileOperationException e) {
+            System.err.println("Ошибка при работе с файлами: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -1,0 +1,309 @@
+================================================================================
+ЛАБОРАТОРНАЯ РАБОТА №3: МНОГОПОТОЧНОСТЬ В JAVA
+================================================================================
+
+Нажмите Enter для запуска Задания 1 (Thread)...
+
+
+================================================================================
+ЗАПУСК ЗАДАНИЯ 1: КЛАСС THREAD
+================================================================================
+
+================================================================================
+ЗАДАНИЕ 1: ДЕМОНСТРАЦИЯ РАБОТЫ С КЛАССОМ THREAD
+================================================================================
+
+Создано 3 самолета для демонстрации параллельной работы потоков
+
+
+================================================================================
+ПРИМЕР 1: Базовое создание и запуск потоков
+================================================================================
+Демонстрация: создание потоков через наследование от Thread
+Запускаем 2 потока обслуживания параллельно
+
+[Maintenance-A320] Starting maintenance for A320
+[Maintenance-737-800] Starting maintenance for 737-800
+[Maintenance-A320] Checking engine systems...
+[Maintenance-737-800] Checking engine systems...
+[Maintenance-737-800] Testing avionics...
+[Maintenance-A320] Testing avionics...
+[Maintenance-A320] Inspecting airframe...
+[Maintenance-737-800] Inspecting airframe...
+[Maintenance-A320] Checking fuel systems...
+[Maintenance-737-800] Checking fuel systems...
+[Maintenance-A320] Performing final checks...
+[Maintenance-737-800] Performing final checks...
+
+*** Performing maintenance on A320 ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[Maintenance-A320] Maintenance completed for A320
+
+*** Performing maintenance on 737-800 ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[Maintenance-737-800] Maintenance completed for 737-800
+
+✓ Оба потока обслуживания завершены
+
+================================================================================
+ПРИМЕР 2: Использование пользовательских имен потоков
+================================================================================
+Демонстрация: именование потоков для лучшей идентификации
+
+[CustomMaintenance-B777] Starting maintenance for 777-300ER
+[CustomMaintenance-B777] Checking engine systems...
+[CustomMaintenance-B777] Testing avionics...
+[CustomMaintenance-B777] Inspecting airframe...
+[CustomMaintenance-B777] Checking fuel systems...
+[CustomMaintenance-B777] Performing final checks...
+
+*** Performing maintenance on 777-300ER ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[CustomMaintenance-B777] Maintenance completed for 777-300ER
+
+✓ Поток с пользовательским именем завершен
+
+================================================================================
+ПРИМЕР 3: Параллельное выполнение разных типов потоков
+================================================================================
+Демонстрация: одновременное обслуживание и полет разных самолетов
+
+[Flight-737-800-to-Moscow] Starting flight simulation for 737-800
+[Flight-737-800-to-Moscow] Pre-flight checks...
+[Maintenance-A320] Starting maintenance for A320
+[Maintenance-A320] Checking engine systems...
+[Flight-777-300ER-to-London] Starting flight simulation for 777-300ER
+[Flight-777-300ER-to-London] Pre-flight checks...
+[Flight-737-800-to-Moscow] Starting engines...
+[Flight-777-300ER-to-London] Starting engines...
+
+=== Starting Boeing 737-800 ===
+
+=== Starting Boeing 777-300ER ===
+Engine GE90-115B starting...
+Engine CFM56-7B starting...
+Aircraft systems initialized.
+Aircraft systems initialized.
+[Flight-737-800-to-Moscow] Taking off to Moscow
+
+>>> 737-800 is taking off...
+Engine CFM56-7B quick starting!
+[Flight-777-300ER-to-London] Taking off to London
+
+>>> 777-300ER is taking off...
+Engine GE90-115B quick starting!
+Accelerating on runway...
+Lifting off!
+Accelerating on runway...
+Lifting off!
+[Maintenance-A320] Testing avionics...
+[Maintenance-A320] Inspecting airframe...
+[Flight-737-800-to-Moscow] Climbing to cruise altitude...
+Flying at 10000 meters altitude.
+[Flight-777-300ER-to-London] Climbing to cruise altitude...
+Flying at 10000 meters altitude.
+[Maintenance-A320] Checking fuel systems...
+[Flight-737-800-to-Moscow] Cruising at 10,000m to Moscow
+[Flight-777-300ER-to-London] Cruising at 10,000m to London
+[Flight-737-800-to-Moscow] Flight hour 1 completed
+[Flight-777-300ER-to-London] Flight hour 1 completed
+[Maintenance-A320] Performing final checks...
+
+*** Performing maintenance on A320 ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[Maintenance-A320] Maintenance completed for A320
+[Flight-737-800-to-Moscow] Flight hour 2 completed
+[Flight-777-300ER-to-London] Flight hour 2 completed
+[Flight-737-800-to-Moscow] Flight hour 3 completed
+[Flight-777-300ER-to-London] Flight hour 3 completed
+[Flight-737-800-to-Moscow] Descending for landing...
+[Flight-777-300ER-to-London] Descending for landing...
+[Flight-737-800-to-Moscow] Landing at Moscow
+
+<<< 737-800 is landing...
+Descending...
+Touchdown!
+Taxiing to gate.
+[Flight-777-300ER-to-London] Landing at London
+
+<<< 777-300ER is landing...
+Descending...
+Touchdown!
+Taxiing to gate.
+[Flight-737-800-to-Moscow] Shutting down engines...
+
+=== Stopping Boeing 737-800 ===
+[Flight-777-300ER-to-London] Shutting down engines...
+
+=== Stopping Boeing 777-300ER ===
+Engine GE90-115B stopped.
+Aircraft systems shut down.
+[Flight-777-300ER-to-London] Flight completed! Total hours: 5
+Engine CFM56-7B stopped.
+Aircraft systems shut down.
+[Flight-737-800-to-Moscow] Flight completed! Total hours: 5
+
+✓ Все потоки завершены
+
+================================================================================
+ПРИМЕР 4: Получение информации о потоках
+================================================================================
+Информация о потоке ДО запуска:
+  - Имя: Maintenance-737-800
+  - ID: 31
+  - Состояние: NEW
+  - Приоритет: 5
+  - Жив: false
+
+Информация о потоке ПОСЛЕ запуска:
+  - Состояние: RUNNABLE
+  - Жив: true
+[Maintenance-737-800] Starting maintenance for 737-800
+[Maintenance-737-800] Checking engine systems...
+[Maintenance-737-800] Testing avionics...
+[Maintenance-737-800] Inspecting airframe...
+[Maintenance-737-800] Checking fuel systems...
+[Maintenance-737-800] Performing final checks...
+
+*** Performing maintenance on 737-800 ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[Maintenance-737-800] Maintenance completed for 737-800
+
+Информация о потоке ПОСЛЕ завершения:
+  - Состояние: TERMINATED
+  - Жив: false
+
+================================================================================
+ПРИМЕР 5: Запуск множественных потоков одного типа
+================================================================================
+Демонстрация: симуляция работы аэропорта с несколькими рейсами
+
+[Flight-737-700-to-Paris] Starting flight simulation for 737-700
+[Flight-737-700-to-Paris] Pre-flight checks...
+[Flight-A319-to-Berlin] Starting flight simulation for A319
+[Flight-A319-to-Berlin] Pre-flight checks...
+[Flight-737-900-to-Rome] Starting flight simulation for 737-900
+[Flight-737-900-to-Rome] Pre-flight checks...
+[Flight-737-700-to-Paris] Starting engines...
+
+=== Starting Boeing 737-700 ===
+Engine Unknown starting...
+Aircraft systems initialized.
+[Flight-A319-to-Berlin] Starting engines...
+
+=== Starting Airbus A319 ===
+Engine Unknown starting...
+Aircraft systems initialized.
+[Flight-737-900-to-Rome] Starting engines...
+
+=== Starting Boeing 737-900 ===
+Engine Unknown starting...
+Aircraft systems initialized.
+[Flight-737-700-to-Paris] Taking off to Paris
+
+>>> 737-700 is taking off...
+Engine Unknown quick starting!
+Accelerating on runway...
+Lifting off!
+[Flight-737-900-to-Rome] Taking off to Rome
+
+>>> 737-900 is taking off...
+Engine Unknown quick starting!
+Accelerating on runway...
+Lifting off!
+[Flight-A319-to-Berlin] Taking off to Berlin
+
+>>> A319 is taking off...
+Engine Unknown quick starting!
+Accelerating on runway...
+Lifting off!
+[Flight-737-700-to-Paris] Climbing to cruise altitude...
+Flying at 10000 meters altitude.
+[Flight-737-900-to-Rome] Climbing to cruise altitude...
+Flying at 10000 meters altitude.
+[Flight-A319-to-Berlin] Climbing to cruise altitude...
+Flying at 10000 meters altitude.
+[Flight-737-700-to-Paris] Cruising at 10,000m to Paris
+[Flight-737-700-to-Paris] Flight hour 1 completed
+[Flight-A319-to-Berlin] Cruising at 10,000m to Berlin
+[Flight-A319-to-Berlin] Flight hour 1 completed
+[Flight-737-900-to-Rome] Cruising at 10,000m to Rome
+[Flight-737-900-to-Rome] Flight hour 1 completed
+[Flight-737-700-to-Paris] Flight hour 2 completed
+[Flight-A319-to-Berlin] Flight hour 2 completed
+[Flight-737-900-to-Rome] Flight hour 2 completed
+[Flight-A319-to-Berlin] Flight hour 3 completed
+[Flight-737-700-to-Paris] Flight hour 3 completed
+[Flight-737-900-to-Rome] Flight hour 3 completed
+[Flight-737-700-to-Paris] Descending for landing...
+[Flight-A319-to-Berlin] Descending for landing...
+[Flight-737-900-to-Rome] Descending for landing...
+[Flight-A319-to-Berlin] Landing at Berlin
+[Flight-737-700-to-Paris] Landing at Paris
+
+<<< A319 is landing...
+Descending...
+
+<<< 737-700 is landing...
+Descending...
+Touchdown!
+Taxiing to gate.
+Touchdown!
+Taxiing to gate.
+[Flight-737-900-to-Rome] Landing at Rome
+
+<<< 737-900 is landing...
+Descending...
+Touchdown!
+Taxiing to gate.
+[Flight-A319-to-Berlin] Shutting down engines...
+
+=== Stopping Airbus A319 ===
+Engine Unknown stopped.
+Aircraft systems shut down.
+[Flight-A319-to-Berlin] Flight completed! Total hours: 5
+[Flight-737-700-to-Paris] Shutting down engines...
+
+=== Stopping Boeing 737-700 ===
+Engine Unknown stopped.
+Aircraft systems shut down.
+[Flight-737-700-to-Paris] Flight completed! Total hours: 5
+[Flight-737-900-to-Rome] Shutting down engines...
+
+=== Stopping Boeing 737-900 ===
+Engine Unknown stopped.
+Aircraft systems shut down.
+[Flight-737-900-to-Rome] Flight completed! Total hours: 5
+
+✓ Все рейсы завершены
+
+================================================================================
+ИТОГИ ДЕМОНСТРАЦИИ
+================================================================================
+
+Продемонстрированные концепции:
+✓ 1. Создание потоков через наследование от Thread
+✓ 2. Переопределение метода run()
+✓ 3. Запуск потоков через start()
+✓ 4. Параллельное выполнение нескольких потоков
+✓ 5. Использование join() для ожидания завершения
+✓ 6. Именование потоков для идентификации
+✓ 7. Получение информации о состоянии потоков
+✓ 8. Обработка InterruptedException
+
+Главный поток (main) завершен!

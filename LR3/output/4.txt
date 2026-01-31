@@ -1,0 +1,138 @@
+================================================================================
+ЗАДАНИЕ 4: ДЕМОНСТРАЦИЯ СИНХРОНИЗАЦИИ ПОТОКОВ
+================================================================================
+
+================================================================================
+ПРИМЕР 1: Демонстрация проблемы Race Condition
+================================================================================
+Проблема: несколько потоков изменяют общий ресурс без синхронизации
+
+Запуск 10 потоков, каждый увеличивает счетчик 1000 раз
+Ожидаемый результат: 10000
+Фактический результат: 10000
+❌ Результат НЕВЕРНЫЙ из-за race condition!
+   Потоки одновременно изменяли счетчик без синхронизации
+
+================================================================================
+ПРИМЕР 2: Решение проблемы через synchronized
+================================================================================
+Решение: использование synchronized для защиты критической секции
+
+Запуск 10 потоков, каждый увеличивает счетчик 1000 раз
+Ожидаемый результат: 10000
+Фактический результат: 10000
+✓ Результат ВЕРНЫЙ благодаря synchronized!
+  Синхронизация гарантирует, что только один поток изменяет счетчик
+
+================================================================================
+ПРИМЕР 3: Синхронизация доступа к общему ресурсу
+================================================================================
+Сценарий: несколько самолетов используют одну взлетно-посадочную полосу
+
+[Boeing-737-Thread] Boeing-737 requesting Runway-01 for taking off
+[Boeing-737-Thread] ✓ Boeing-737 acquired Runway-01 for taking off
+[Boeing-737-Thread] >>> Boeing-737 is taking off on Runway-01
+[Boeing-737-Thread] <<< Boeing-737 completed taking off
+[Boeing-737-Thread] ✓ Boeing-737 released Runway-01
+[Airbus-A320-Thread] Airbus-A320 requesting Runway-01 for landing
+[Airbus-A320-Thread] ✓ Airbus-A320 acquired Runway-01 for landing
+[Boeing-777-Thread] Boeing-777 requesting Runway-01 for taking off
+[Boeing-777-Thread] Boeing-777 waiting... (occupied by Airbus-A320)
+[Airbus-A380-Thread] Airbus-A380 requesting Runway-01 for landing
+[Airbus-A380-Thread] Airbus-A380 waiting... (occupied by Airbus-A320)
+[Airbus-A320-Thread] >>> Airbus-A320 is landing on Runway-01
+[Airbus-A320-Thread] <<< Airbus-A320 completed landing
+[Airbus-A320-Thread] ✓ Airbus-A320 released Runway-01
+[Boeing-777-Thread] ✓ Boeing-777 acquired Runway-01 for taking off
+[Boeing-777-Thread] >>> Boeing-777 is taking off on Runway-01
+[Boeing-777-Thread] <<< Boeing-777 completed taking off
+[Boeing-777-Thread] ✓ Boeing-777 released Runway-01
+[Airbus-A380-Thread] ✓ Airbus-A380 acquired Runway-01 for landing
+[Airbus-A380-Thread] >>> Airbus-A380 is landing on Runway-01
+[Airbus-A380-Thread] <<< Airbus-A380 completed landing
+[Airbus-A380-Thread] ✓ Airbus-A380 released Runway-01
+
+✓ Все операции на полосе завершены безопасно
+  Синхронизация предотвратила одновременное использование полосы
+
+================================================================================
+ПРИМЕР 4: Паттерн Producer-Consumer
+================================================================================
+Сценарий: поставщики заправляют резервуар, самолеты забирают топливо
+
+[Boeing-737-Thread] Boeing-737 waiting for fuel... Tank Main-Tank has only 0 liters (need 2500)
+[Airbus-A320-Thread] Airbus-A320 waiting for fuel... Tank Main-Tank has only 0 liters (need 3500)
+[Supplier-1-Thread] ⛽ Supplier-1 refilled Tank Main-Tank with 3000 liters
+[Supplier-1-Thread] Tank Main-Tank level: 3000/10000 liters
+[Boeing-737-Thread] ✈️  Boeing-737 withdrew 2500 liters from Tank Main-Tank
+[Boeing-737-Thread] Tank Main-Tank level: 500/10000 liters
+[Airbus-A320-Thread] Airbus-A320 waiting for fuel... Tank Main-Tank has only 500 liters (need 3500)
+[Supplier-2-Thread] ⛽ Supplier-2 refilled Tank Main-Tank with 4000 liters
+[Supplier-2-Thread] Tank Main-Tank level: 4500/10000 liters
+[Airbus-A320-Thread] ✈️  Airbus-A320 withdrew 3500 liters from Tank Main-Tank
+[Airbus-A320-Thread] Tank Main-Tank level: 1000/10000 liters
+[Supplier-1-Thread] ⛽ Supplier-1 refilled Tank Main-Tank with 3000 liters
+[Supplier-1-Thread] Tank Main-Tank level: 4000/10000 liters
+[Boeing-737-Thread] ✈️  Boeing-737 withdrew 2500 liters from Tank Main-Tank
+[Boeing-737-Thread] Tank Main-Tank level: 1500/10000 liters
+[Supplier-2-Thread] ⛽ Supplier-2 refilled Tank Main-Tank with 4000 liters
+[Supplier-2-Thread] Tank Main-Tank level: 5500/10000 liters
+[Supplier-1-Thread] ⛽ Supplier-1 refilled Tank Main-Tank with 3000 liters
+[Supplier-1-Thread] Tank Main-Tank level: 8500/10000 liters
+[Airbus-A320-Thread] ✈️  Airbus-A320 withdrew 3000 liters from Tank Main-Tank
+[Airbus-A320-Thread] Tank Main-Tank level: 5500/10000 liters
+
+✓ Все операции с топливом завершены
+  Финальный уровень в резервуаре: 5500 литров
+  wait/notify обеспечили корректную координацию
+
+================================================================================
+ПРИМЕР 5: Комплексная синхронизация операций аэропорта
+================================================================================
+Сценарий: координация взлетов, посадок и заправки
+
+[Supplier-Thread] ⛽ Initial-Supply refilled Tank Airport-Tank with 13000 liters
+[Supplier-Thread] Tank Airport-Tank level: 13000/15000 liters
+Запуск комплексных операций...
+
+[Flight-AA101] ✈️  Flight-AA101 withdrew 4000 liters from Tank Airport-Tank
+[Flight-BA202] Flight-BA202 requesting Runway-02 for landing
+[Flight-BA202] ✓ Flight-BA202 acquired Runway-02 for landing
+[Flight-BA202] >>> Flight-BA202 is landing on Runway-02
+[Flight-AA101] Tank Airport-Tank level: 9000/15000 liters
+[Flight-LH303] ✈️  Flight-LH303 withdrew 4500 liters from Tank Airport-Tank
+[Flight-LH303] Tank Airport-Tank level: 4500/15000 liters
+[Flight-BA202] <<< Flight-BA202 completed landing
+[Flight-BA202] ✓ Flight-BA202 released Runway-02
+[Flight-AA101] Flight-AA101 requesting Runway-02 for taking off
+[Flight-AA101] ✓ Flight-AA101 acquired Runway-02 for taking off
+[Flight-AA101] >>> Flight-AA101 is taking off on Runway-02
+[Flight-BA202] ✈️  Flight-BA202 withdrew 3500 liters from Tank Airport-Tank
+[Flight-BA202] Tank Airport-Tank level: 1000/15000 liters
+[Flight-AA101] <<< Flight-AA101 completed taking off
+[Flight-AA101] ✓ Flight-AA101 released Runway-02
+[Flight-LH303] Flight-LH303 requesting Runway-02 for taking off
+[Flight-LH303] ✓ Flight-LH303 acquired Runway-02 for taking off
+[Flight-LH303] >>> Flight-LH303 is taking off on Runway-02
+[Flight-LH303] <<< Flight-LH303 completed taking off
+[Flight-LH303] ✓ Flight-LH303 released Runway-02
+
+✓ Все комплексные операции завершены успешно
+  Синхронизация обеспечила безопасную координацию:
+  - Взлетно-посадочная полоса использовалась по очереди
+  - Топливо распределялось корректно
+  - Не было конфликтов между потоками
+
+================================================================================
+ИТОГИ ДЕМОНСТРАЦИИ
+================================================================================
+
+Продемонстрированные концепции:
+✓ 1. Проблема race condition и ее последствия
+✓ 2. Использование synchronized для защиты критических секций
+✓ 3. Методы wait() и notify() для координации потоков
+✓ 4. Паттерн Producer-Consumer
+✓ 5. Взаимное исключение при доступе к общим ресурсам
+✓ 6. Практические сценарии синхронизации
+
+Главный поток (main) завершен!

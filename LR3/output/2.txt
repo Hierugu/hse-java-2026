@@ -1,0 +1,203 @@
+================================================================================
+ЗАДАНИЕ 2: ДЕМОНСТРАЦИЯ РАБОТЫ С ИНТЕРФЕЙСОМ RUNNABLE
+================================================================================
+
+Создано 3 самолета для демонстрации работы с Runnable
+
+
+================================================================================
+ПРИМЕР 1: Базовое использование Runnable
+================================================================================
+Демонстрация: создание задач через реализацию Runnable
+Запускаем задачи заправки и посадки параллельно
+
+[Board-Thread-1] Starting boarding for A320 at Gate-H
+[Refuel-Thread-1] Starting refueling for 737-800 at Station-77
+[Board-Thread-1] Opening boarding gate...
+[Refuel-Thread-1] Connecting fuel hose...
+[Board-Thread-1] Boarding group: 30/180 passengers on A320
+[Refuel-Thread-1] Checking fuel system...
+[Refuel-Thread-1] Refueling 737-800: 1000/5000 liters
+[Board-Thread-1] Boarding group: 60/180 passengers on A320
+[Refuel-Thread-1] Refueling 737-800: 2000/5000 liters
+[Refuel-Thread-1] Refueling 737-800: 3000/5000 liters
+[Board-Thread-1] Boarding group: 90/180 passengers on A320
+[Refuel-Thread-1] Refueling 737-800: 4000/5000 liters
+[Board-Thread-1] Boarding group: 120/180 passengers on A320
+[Refuel-Thread-1] Refueling 737-800: 5000/5000 liters
+[Board-Thread-1] Boarding group: 150/180 passengers on A320
+[Refuel-Thread-1] Disconnecting fuel hose...
+[Refuel-Thread-1] ✓ Refueling completed for 737-800 (5000.0 liters)
+[Board-Thread-1] Boarding group: 180/180 passengers on A320
+[Board-Thread-1] Checking cabin, securing doors...
+[Board-Thread-1] Safety briefing in progress...
+[Board-Thread-1] ✓ Boarding completed for A320 (180 passengers)
+
+✓ Обе задачи завершены
+
+================================================================================
+ПРИМЕР 2: Повторное использование задачи
+================================================================================
+Демонстрация: одна задача может быть запущена в нескольких потоках
+Запускаем одну задачу предполетной проверки в 3 потоках
+
+[Check-Thread-1] Starting pre-flight check for 777-300ER by Chief-Inspector
+[Check-Thread-2] Starting pre-flight check for 777-300ER by Chief-Inspector
+[Check-Thread-3] Starting pre-flight check for 777-300ER by Chief-Inspector
+[Check-Thread-3] External inspection of 777-300ER
+[Check-Thread-1] External inspection of 777-300ER
+[Check-Thread-2] External inspection of 777-300ER
+[Check-Thread-1] - Checking fuselage and wings
+[Check-Thread-2] - Checking fuselage and wings
+[Check-Thread-3] - Checking fuselage and wings
+[Check-Thread-1] - Inspecting landing gear
+[Check-Thread-2] - Inspecting landing gear
+[Check-Thread-3] - Inspecting landing gear
+[Check-Thread-1] Engine inspection
+[Check-Thread-3] Engine inspection
+[Check-Thread-2] Engine inspection
+[Check-Thread-1] - Testing engine systems
+[Check-Thread-3] - Testing engine systems
+[Check-Thread-2] - Testing engine systems
+[Check-Thread-1] Avionics check
+[Check-Thread-3] Avionics check
+[Check-Thread-2] Avionics check
+[Check-Thread-3] - Testing navigation systems
+[Check-Thread-1] - Testing navigation systems
+[Check-Thread-2] - Testing navigation systems
+[Check-Thread-2] - Checking communication equipment
+[Check-Thread-1] - Checking communication equipment
+[Check-Thread-3] - Checking communication equipment
+[Check-Thread-1] Fuel system verification
+[Check-Thread-3] Fuel system verification
+[Check-Thread-2] Fuel system verification
+[Check-Thread-3] Hydraulic systems check
+[Check-Thread-2] Hydraulic systems check
+[Check-Thread-1] Hydraulic systems check
+[Check-Thread-3] Final safety checks
+[Check-Thread-2] Final safety checks
+[Check-Thread-1] Final safety checks
+[Check-Thread-1] ✓ Pre-flight check completed for 777-300ER - CLEARED FOR TAKEOFF
+[Check-Thread-2] ✓ Pre-flight check completed for 777-300ER - CLEARED FOR TAKEOFF
+[Check-Thread-3] ✓ Pre-flight check completed for 777-300ER - CLEARED FOR TAKEOFF
+
+✓ Все проверки завершены
+
+================================================================================
+ПРИМЕР 3: Анонимный класс Runnable
+================================================================================
+Демонстрация: создание Runnable через анонимный класс
+
+[Anonymous-Thread] Starting anonymous task for 737-800
+[Anonymous-Thread] Step 1 of 3
+[Anonymous-Thread] Step 2 of 3
+[Anonymous-Thread] Step 3 of 3
+[Anonymous-Thread] ✓ Anonymous task completed
+
+================================================================================
+ПРИМЕР 4: Лямбда-выражения для Runnable
+================================================================================
+Демонстрация: современный способ создания Runnable через лямбда
+
+[Lambda-Thread-1] Lambda task started
+[Lambda-Thread-2] Preparing flight to New York
+[Lambda-Thread-2] Flight plan for 777-300ER approved
+[Lambda-Thread-1] Processing A320
+[Lambda-Thread-2] ✓ Ready for departure to New York
+[Lambda-Thread-1] ✓ Lambda task completed
+
+✓ Все лямбда-задачи завершены
+
+================================================================================
+ПРИМЕР 5: Комплексная подготовка к полету
+================================================================================
+Демонстрация: параллельное выполнение всех задач подготовки
+
+Starting all preparation tasks for 737-800...
+
+[Refuel-B737] Starting refueling for 737-800 at Station-A1
+[Refuel-B737] Connecting fuel hose...
+[Board-B737] Starting boarding for 737-800 at Gate-B5
+[Board-B737] Opening boarding gate...
+[Check-B737] Starting pre-flight check for 737-800 by Captain-Smith
+[Check-B737] External inspection of 737-800
+[Board-B737] Boarding group: 30/189 passengers on 737-800
+[Refuel-B737] Checking fuel system...
+[Check-B737] - Checking fuselage and wings
+[Refuel-B737] Refueling 737-800: 1000/6000 liters
+[Check-B737] - Inspecting landing gear
+[Board-B737] Boarding group: 60/189 passengers on 737-800
+[Refuel-B737] Refueling 737-800: 2000/6000 liters
+[Check-B737] Engine inspection
+[Board-B737] Boarding group: 90/189 passengers on 737-800
+[Refuel-B737] Refueling 737-800: 3000/6000 liters
+[Check-B737] - Testing engine systems
+[Refuel-B737] Refueling 737-800: 4000/6000 liters
+[Board-B737] Boarding group: 120/189 passengers on 737-800
+[Check-B737] Avionics check
+[Refuel-B737] Refueling 737-800: 5000/6000 liters
+[Board-B737] Boarding group: 150/189 passengers on 737-800
+[Check-B737] - Testing navigation systems
+[Refuel-B737] Refueling 737-800: 6000/6000 liters
+[Check-B737] - Checking communication equipment
+[Refuel-B737] Disconnecting fuel hose...
+[Board-B737] Boarding group: 180/189 passengers on 737-800
+[Check-B737] Fuel system verification
+[Refuel-B737] ✓ Refueling completed for 737-800 (6000.0 liters)
+[Check-B737] Hydraulic systems check
+[Board-B737] Boarding group: 189/189 passengers on 737-800
+[Check-B737] Final safety checks
+[Board-B737] Checking cabin, securing doors...
+[Check-B737] ✓ Pre-flight check completed for 737-800 - CLEARED FOR TAKEOFF
+[Board-B737] Safety briefing in progress...
+[Board-B737] ✓ Boarding completed for 737-800 (189 passengers)
+
+✓ Все задачи подготовки завершены - самолет готов к вылету!
+
+================================================================================
+ПРИМЕР 6: Сравнение подходов Thread vs Runnable
+================================================================================
+
+Подход 1: Наследование от Thread (из Задания 1)
+
+Подход 2: Реализация Runnable (Задание 2)
+[Maintenance-A320] Starting maintenance for A320
+[Maintenance-A320] Checking engine systems...
+[Runnable-Approach] Starting refueling for A320 at Station-60
+[Runnable-Approach] Connecting fuel hose...
+[Runnable-Approach] Checking fuel system...
+[Runnable-Approach] Refueling A320: 1000/4500 liters
+[Maintenance-A320] Testing avionics...
+[Runnable-Approach] Refueling A320: 2000/4500 liters
+[Runnable-Approach] Refueling A320: 3000/4500 liters
+[Maintenance-A320] Inspecting airframe...
+[Runnable-Approach] Refueling A320: 4000/4500 liters
+[Runnable-Approach] Refueling A320: 4500/4500 liters
+[Runnable-Approach] Disconnecting fuel hose...
+[Maintenance-A320] Checking fuel systems...
+[Runnable-Approach] ✓ Refueling completed for A320 (4500.0 liters)
+[Maintenance-A320] Performing final checks...
+
+*** Performing maintenance on A320 ***
+Checking engine...
+Inspecting wings and fuselage...
+Testing avionics...
+Maintenance complete!
+[Maintenance-A320] Maintenance completed for A320
+
+✓ Оба подхода завершены
+
+================================================================================
+ИТОГИ ДЕМОНСТРАЦИИ
+================================================================================
+
+Продемонстрированные концепции:
+✓ 1. Реализация интерфейса Runnable
+✓ 2. Создание потоков через new Thread(Runnable)
+✓ 3. Повторное использование одной задачи в разных потоках
+✓ 4. Анонимные классы для Runnable
+✓ 5. Лямбда-выражения (современный подход)
+✓ 6. Параллельное выполнение множества задач
+✓ 7. Сравнение Thread vs Runnable
+
+Главный поток (main) завершен!

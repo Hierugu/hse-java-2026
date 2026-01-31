@@ -1,0 +1,197 @@
+
+╔════════════════════════════════════════════════════════════╗
+║                  Лабораторная работа 4                     ║
+║        Пакет java.net. Сетевые приложения Java             ║
+╚════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════
+                    ЗАДАНИЕ 1                              
+═══════════════════════════════════════════════════════════
+
+
+╔════════════════════════════════════════════════════════════╗
+║         Task 1: URL Component Parser Demo                 ║
+║         Java Networking (java.net.URL)                     ║
+╚════════════════════════════════════════════════════════════╝
+
+============================================================
+Parsing URL: http://www.example.com
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : http
+Host                : www.example.com
+Port                : 80 (default for http)
+Path                : /
+File                : /
+Authority           : www.example.com
+------------------------------------------------------------
+Complete URL        : http://www.example.com
+
+============================================================
+Parsing URL: https://www.example.com:8080/api/users
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : https
+Host                : www.example.com
+Port                : 8080 (explicit)
+Default Port        : 443
+Path                : /api/users
+File                : /api/users
+Authority           : www.example.com:8080
+------------------------------------------------------------
+Complete URL        : https://www.example.com:8080/api/users
+
+============================================================
+Parsing URL: http://www.example.com/search?q=java&lang=en
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : http
+Host                : www.example.com
+Port                : 80 (default for http)
+Path                : /search
+File                : /search?q=java&lang=en
+Query Parameters    : q=java&lang=en
+Authority           : www.example.com
+------------------------------------------------------------
+Complete URL        : http://www.example.com/search?q=java&lang=en
+
+============================================================
+Parsing URL: ftp://ftp.example.com/pub/docs/manual.pdf
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : ftp
+Host                : ftp.example.com
+Port                : 21 (default for ftp)
+Path                : /pub/docs/manual.pdf
+File                : /pub/docs/manual.pdf
+Authority           : ftp.example.com
+------------------------------------------------------------
+Complete URL        : ftp://ftp.example.com/pub/docs/manual.pdf
+
+============================================================
+Parsing URL: http://localhost:3000/index.html
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : http
+Host                : localhost
+Port                : 3000 (explicit)
+Default Port        : 80
+Path                : /index.html
+File                : /index.html
+Authority           : localhost:3000
+------------------------------------------------------------
+Complete URL        : http://localhost:3000/index.html
+
+============================================================
+Parsing URL: https://docs.oracle.com/javase/tutorial/networking/urls/index.html#DOWNLOADING
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : https
+Host                : docs.oracle.com
+Port                : 443 (default for https)
+Path                : /javase/tutorial/networking/urls/index.html
+File                : /javase/tutorial/networking/urls/index.html
+Fragment/Anchor     : DOWNLOADING
+Authority           : docs.oracle.com
+------------------------------------------------------------
+Complete URL        : https://docs.oracle.com/javase/tutorial/networking/urls/index.html#DOWNLOADING
+
+============================================================
+Parsing URL: https://user:pass@www.example.com:8443/path/to/resource.html?id=123&type=test#section2
+============================================================
+
+📋 URL Components:
+------------------------------------------------------------
+Protocol            : https
+Host                : www.example.com
+Port                : 8443 (explicit)
+Default Port        : 443
+Path                : /path/to/resource.html
+File                : /path/to/resource.html?id=123&type=test
+Query Parameters    : id=123&type=test
+Fragment/Anchor     : section2
+Authority           : user:pass@www.example.com:8443
+------------------------------------------------------------
+Complete URL        : https://user:pass@www.example.com:8443/path/to/resource.html?id=123&type=test#section2
+
+============================================================
+Parsing URL: htp://invalid url with spaces
+============================================================
+ERROR: Invalid URL format!
+Reason: unknown protocol: htp
+
+============================================================
+URL parsing demonstration completed!
+============================================================
+
+
+═══════════════════════════════════════════════════════════
+                    ЗАДАНИЕ 2                              
+═══════════════════════════════════════════════════════════
+
+
+╔════════════════════════════════════════════════════════════╗
+║      Task 2: Multi-threaded Web Content Fetcher           ║
+║      Concurrent website content downloading                ║
+╚════════════════════════════════════════════════════════════╝
+
+Starting concurrent website fetching...
+
+[Thread-1] Starting: http://www.example.com
+[Thread-2] Starting: http://www.example.org
+[Thread-2] Connected successfully
+[Thread-2] Completed: 1 lines, 512 characters
+[Thread-2] Execution time: 0.192 seconds
+[Thread-1] Connected successfully
+[Thread-1] Completed: 1 lines, 512 characters
+[Thread-1] Execution time: 0.283 seconds
+
+============================================================
+SUMMARY:
+============================================================
+Thread-1 status: SUCCESS
+Thread-2 status: SUCCESS
+
+Total execution time: 0.283 seconds
+Total lines read: 2
+Total characters read: 1024
+============================================================
+
+
+╔════════════════════════════════════════════════════════════╗
+║      Extended Demo: Multiple Concurrent Threads           ║
+╚════════════════════════════════════════════════════════════╝
+
+[Thread-1] Starting: http://www.example.com
+[Thread-2] Starting: http://www.example.org
+[Thread-3] Starting: http://www.example.net
+[Thread-2] Connected successfully
+[Thread-2] Completed: 1 lines, 512 characters
+[Thread-2] Execution time: 0.076 seconds
+[Thread-3] Connected successfully
+[Thread-3] Completed: 1 lines, 512 characters
+[Thread-3] Execution time: 0.099 seconds
+[Thread-1] Connected successfully
+[Thread-1] Completed: 1 lines, 512 characters
+[Thread-1] Execution time: 0.151 seconds
+
+============================================================
+All threads completed!
+============================================================
+
+
+╔════════════════════════════════════════════════════════════╗
+║              Все задания выполнены успешно!                ║
+╚════════════════════════════════════════════════════════════╝

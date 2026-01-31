@@ -1,0 +1,250 @@
+================================================================================
+ЗАДАНИЕ 3: ДЕМОНСТРАЦИЯ РАБОТЫ С ПРИОРИТЕТАМИ ПОТОКОВ
+================================================================================
+
+Диапазон приоритетов в Java:
+  MIN_PRIORITY  = 1 (минимальный)
+  NORM_PRIORITY = 5 (по умолчанию)
+  MAX_PRIORITY  = 10 (максимальный)
+
+
+================================================================================
+ПРИМЕР 1: Базовая установка приоритетов
+================================================================================
+Демонстрация: создание потоков с разными приоритетами
+
+Приоритеты установлены:
+  Emergency-Thread: 10
+  Maintenance-Thread: 5
+  Logging-Thread: 1
+
+[Emergency-Thread] EMERGENCY! Priority: 10
+[Logging-Thread] Starting background logging. Priority: 1
+[Maintenance-Thread] Starting routine maintenance. Priority: 5
+[Emergency-Thread] 737-800 - Engine failure
+[Logging-Thread] 777-300ER - Logging 5 records
+[Maintenance-Thread] A320 - Scheduled check
+[Logging-Thread] 📝 Logging record 1/5 for 777-300ER
+[Emergency-Thread] ⚠️  Declaring emergency...
+[Maintenance-Thread] 🔧 Checking systems...
+[Emergency-Thread] ⚠️  Clearing airspace...
+[Logging-Thread] 📝 Logging record 2/5 for 777-300ER
+[Maintenance-Thread] 🔧 Inspecting components...
+[Emergency-Thread] ⚠️  Preparing emergency landing...
+[Emergency-Thread] ⚠️  Emergency services on standby...
+[Logging-Thread] 📝 Logging record 3/5 for 777-300ER
+[Maintenance-Thread] 🔧 Testing equipment...
+[Emergency-Thread] ⚠️  Beginning emergency descent...
+[Logging-Thread] 📝 Compressing data...
+[Maintenance-Thread] 🔧 Replacing filters...
+[Emergency-Thread] ⚠️  Final approach...
+[Logging-Thread] 📝 Logging record 4/5 for 777-300ER
+[Emergency-Thread] ⚠️  EMERGENCY LANDING COMPLETE!
+[Emergency-Thread] ✓ Emergency handled in 832ms
+[Emergency-Thread] Aircraft and passengers safe!
+[Maintenance-Thread] 🔧 Lubricating parts...
+[Logging-Thread] 📝 Logging record 5/5 for 777-300ER
+[Maintenance-Thread] 🔧 Final inspection...
+[Logging-Thread] 📝 Finalizing log file...
+[Maintenance-Thread] 🔧 Updating maintenance log...
+[Logging-Thread] ✓ Logging completed in 1281ms
+[Logging-Thread] Total records: 5
+[Maintenance-Thread] ✓ Routine maintenance completed in 1309ms
+
+✓ Все задачи завершены
+
+================================================================================
+ПРИМЕР 2: Влияние приоритетов на время выполнения
+================================================================================
+Демонстрация: запуск одинаковых задач с разными приоритетами
+
+Запуск трех одинаковых задач с разными приоритетами...
+
+[High-Priority] Starting background logging. Priority: 10
+[High-Priority] 737-800 - Logging 8 records
+[High-Priority] 📝 Logging record 1/8 for 737-800
+[Normal-Priority] Starting background logging. Priority: 5
+[Normal-Priority] A320 - Logging 8 records
+[Normal-Priority] 📝 Logging record 1/8 for A320
+[Low-Priority] Starting background logging. Priority: 1
+[Low-Priority] 777-300ER - Logging 8 records
+[Low-Priority] 📝 Logging record 1/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 2/8 for A320
+[High-Priority] 📝 Logging record 2/8 for 737-800
+[Low-Priority] 📝 Logging record 2/8 for 777-300ER
+[Low-Priority] 📝 Logging record 3/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 3/8 for A320
+[High-Priority] 📝 Logging record 3/8 for 737-800
+[Normal-Priority] 📝 Compressing data...
+[Low-Priority] 📝 Compressing data...
+[High-Priority] 📝 Compressing data...
+[Normal-Priority] 📝 Logging record 4/8 for A320
+[Low-Priority] 📝 Logging record 4/8 for 777-300ER
+[High-Priority] 📝 Logging record 4/8 for 737-800
+[Low-Priority] 📝 Logging record 5/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 5/8 for A320
+[High-Priority] 📝 Logging record 5/8 for 737-800
+[Low-Priority] 📝 Logging record 6/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 6/8 for A320
+[High-Priority] 📝 Logging record 6/8 for 737-800
+[Low-Priority] 📝 Compressing data...
+[Normal-Priority] 📝 Compressing data...
+[High-Priority] 📝 Compressing data...
+[Low-Priority] 📝 Logging record 7/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 7/8 for A320
+[High-Priority] 📝 Logging record 7/8 for 737-800
+[Low-Priority] 📝 Logging record 8/8 for 777-300ER
+[Normal-Priority] 📝 Logging record 8/8 for A320
+[High-Priority] 📝 Logging record 8/8 for 737-800
+[Low-Priority] 📝 Finalizing log file...
+[Normal-Priority] 📝 Finalizing log file...
+[High-Priority] 📝 Finalizing log file...
+[Low-Priority] ✓ Logging completed in 1990ms
+[Low-Priority] Total records: 8
+[Normal-Priority] ✓ Logging completed in 1993ms
+[Normal-Priority] Total records: 8
+[High-Priority] ✓ Logging completed in 2003ms
+[High-Priority] Total records: 8
+
+--- Результаты ---
+High Priority (10):   2003ms
+Normal Priority (5):  1993ms
+Low Priority (1):     1990ms
+
+Примечание: Разница может быть незначительной из-за особенностей планировщика ОС
+
+================================================================================
+ПРИМЕР 3: Динамическое изменение приоритета
+================================================================================
+Демонстрация: изменение приоритета работающего потока
+
+Начальный приоритет: 5
+Установлен MIN_PRIORITY: 1
+[Dynamic-Priority] Starting background logging. Priority: 1
+[Dynamic-Priority] 737-800 - Logging 6 records
+[Dynamic-Priority] 📝 Logging record 1/6 for 737-800
+[Dynamic-Priority] 📝 Logging record 2/6 for 737-800
+[Dynamic-Priority] 📝 Logging record 3/6 for 737-800
+[Dynamic-Priority] 📝 Compressing data...
+[Dynamic-Priority] 📝 Logging record 4/6 for 737-800
+[Dynamic-Priority] 📝 Logging record 5/6 for 737-800
+
+>>> Повышаем приоритет до MAX_PRIORITY
+Новый приоритет: 10
+
+[Dynamic-Priority] 📝 Logging record 6/6 for 737-800
+[Dynamic-Priority] 📝 Compressing data...
+[Dynamic-Priority] 📝 Finalizing log file...
+[Dynamic-Priority] ✓ Logging completed in 1581ms
+[Dynamic-Priority] Total records: 6
+
+✓ Задача завершена
+
+================================================================================
+ПРИМЕР 4: Использование пользовательских значений приоритетов
+================================================================================
+Демонстрация: установка произвольных значений от 1 до 10
+
+Created Task-1 with priority 1
+Created Task-2 with priority 3
+Created Task-3 with priority 5
+Created Task-4 with priority 7
+Created Task-5 with priority 10
+
+Запуск всех потоков...
+
+[Task-1] Running with priority 1
+[Task-3] Running with priority 5
+[Task-4] Running with priority 7
+[Task-2] Running with priority 3
+[Task-5] Running with priority 10
+[Task-4] Completed
+[Task-5] Completed
+[Task-3] Completed
+[Task-2] Completed
+[Task-1] Completed
+
+✓ Все задачи завершены
+
+================================================================================
+ПРИМЕР 5: Практический сценарий - Управление воздушным движением
+================================================================================
+Демонстрация: реалистичное использование приоритетов
+
+Приоритеты операций:
+  🚨 EMERGENCY: 10 (КРИТИЧНО)
+  🔧 Routine-Ops: 5 (обычная)
+  ⛽ Refuel-Ops: 5 (обычная)
+  📝 Background-Log-1: 1 (фон)
+  📝 Background-Log-2: 1 (фон)
+
+[EMERGENCY] EMERGENCY! Priority: 10
+[Routine-Ops] Starting routine maintenance. Priority: 5
+[Routine-Ops] A320 - Pre-flight inspection
+[Routine-Ops] 🔧 Checking systems...
+[EMERGENCY] 737-800 - Medical emergency
+[EMERGENCY] ⚠️  Declaring emergency...
+[Refuel-Ops] Starting refueling for 777-300ER at Station-19
+[Refuel-Ops] Connecting fuel hose...
+[Background-Log-1] Starting background logging. Priority: 1
+[Background-Log-2] Starting background logging. Priority: 1
+[Background-Log-2] A320 - Logging 4 records
+[Background-Log-2] 📝 Logging record 1/4 for A320
+[Background-Log-1] 737-800 - Logging 4 records
+[Background-Log-1] 📝 Logging record 1/4 for 737-800
+[EMERGENCY] ⚠️  Clearing airspace...
+[Routine-Ops] 🔧 Inspecting components...
+[Background-Log-2] 📝 Logging record 2/4 for A320
+[Background-Log-1] 📝 Logging record 2/4 for 737-800
+[EMERGENCY] ⚠️  Preparing emergency landing...
+[EMERGENCY] ⚠️  Emergency services on standby...
+[Background-Log-1] 📝 Logging record 3/4 for 737-800
+[Background-Log-2] 📝 Logging record 3/4 for A320
+[Routine-Ops] 🔧 Testing equipment...
+[EMERGENCY] ⚠️  Beginning emergency descent...
+[Refuel-Ops] Checking fuel system...
+[Background-Log-1] 📝 Compressing data...
+[Background-Log-2] 📝 Compressing data...
+[Routine-Ops] 🔧 Replacing filters...
+[EMERGENCY] ⚠️  Final approach...
+[Background-Log-2] 📝 Logging record 4/4 for A320
+[Background-Log-1] 📝 Logging record 4/4 for 737-800
+[Refuel-Ops] Refueling 777-300ER: 1000/8000 liters
+[EMERGENCY] ⚠️  EMERGENCY LANDING COMPLETE!
+[EMERGENCY] ✓ Emergency handled in 821ms
+[EMERGENCY] Aircraft and passengers safe!
+[Routine-Ops] 🔧 Lubricating parts...
+[Background-Log-2] 📝 Finalizing log file...
+[Background-Log-1] 📝 Finalizing log file...
+[Routine-Ops] 🔧 Final inspection...
+[Background-Log-2] ✓ Logging completed in 1074ms
+[Background-Log-2] Total records: 4
+[Background-Log-1] ✓ Logging completed in 1074ms
+[Background-Log-1] Total records: 4
+[Routine-Ops] 🔧 Updating maintenance log...
+[Refuel-Ops] Refueling 777-300ER: 2000/8000 liters
+[Routine-Ops] ✓ Routine maintenance completed in 1303ms
+[Refuel-Ops] Refueling 777-300ER: 3000/8000 liters
+[Refuel-Ops] Refueling 777-300ER: 4000/8000 liters
+[Refuel-Ops] Refueling 777-300ER: 5000/8000 liters
+[Refuel-Ops] Refueling 777-300ER: 6000/8000 liters
+[Refuel-Ops] Refueling 777-300ER: 7000/8000 liters
+[Refuel-Ops] Refueling 777-300ER: 8000/8000 liters
+[Refuel-Ops] Disconnecting fuel hose...
+[Refuel-Ops] ✓ Refueling completed for 777-300ER (8000.0 liters)
+
+✓ Все операции завершены
+
+================================================================================
+ИТОГИ ДЕМОНСТРАЦИИ
+================================================================================
+
+Продемонстрированные концепции:
+✓ 1. Установка приоритетов через setPriority()
+✓ 2. Использование констант MIN/NORM/MAX_PRIORITY
+✓ 3. Пользовательские значения приоритетов (1-10)
+✓ 4. Динамическое изменение приоритета
+✓ 5. Влияние приоритетов на выполнение
+✓ 6. Практические сценарии использования
+
+Главный поток (main) завершен!
